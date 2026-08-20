@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studious Coaching Classes | Build Strong Concepts</title>
+    <meta name="description" content="High-quality coaching for school boards and competitive exams. Small batches, expert faculty, and personalized mentorship.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#0B0E17',
+                        cardSurface: '#161A23',
+                        brandOrange: '#FF5E3A',
+                        brandGold: '#FFD200',
+                        brandCyan: '#00D2FF',
+                        whatsapp: '#25D366',
+                        textMuted: '#A0AEC0',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(0, 210, 255, 0.2)' },
+                            '100%': { boxShadow: '0 0 20px rgba(0, 210, 255, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0E17;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-header {
+            background: rgba(11, 14, 23, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: rgba(22, 26, 35, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #161A23;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5E3A;
+        }
+
+        /* Form Inputs */
+        .form-input {
+            background: rgba(11, 14, 23, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #FF5E3A;
+            box-shadow: 0 0 0 1px #FF5E3A;
+        }
+
+        /* Background Pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="antialiased pb-16 md:pb-0">
+
+    <!-- 1. STICKY GLASSMORPHIC HEADER -->
+    <header class="fixed top-0 w-full z-50 glass-header transition-all duration-300" id="header">
+        <div class="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex flex-col">
+                <span class="text-2xl font-bold tracking-wider text-white">STUDIOUS</span>
+                <span class="text-[10px] tracking-widest text-brandGold font-semibold -mt-1">COACHING CLASSES</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-sm font-medium text-textMuted hover:text-white transition">Home</a>
+                <a href="#courses" class="text-sm font-medium text-textMuted hover:text-white transition">Courses</a>
+                <a href="#methodology" class="text-sm font-medium text-textMuted hover:text-white transition">Methodology</a>
+                <a href="#gallery" class="text-sm font-medium text-textMuted hover:text-white transition">Gallery</a>
+                <a href="#contact" class="text-sm font-medium text-textMuted hover:text-white transition">Contact</a>
+            </nav>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <button onclick="openModal()" class="hidden md:flex items-center justify-center bg-brandOrange hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg shadow-[0_0_15px_rgba(255,94,58,0.4)] hover:shadow-[0_0_25px_rgba(255,94,58,0.6)] transition-all duration-300 relative overflow-hidden group">
+                    <span class="relative z-10 flex items-center gap-2">
+                        BOOK FREE DEMO <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </span>
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                </button>
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardSurface border-t border-gray-800">
+            <div class="flex flex-col px-4 py-4 space-y-4">
+                <a href="#home" class="text-white font-medium">Home</a>
+                <a href="#courses" class="text-white font-medium">Courses</a>
+                <a href="#methodology" class="text-white font-medium">Methodology</a>
+                <a href="#gallery" class="text-white font-medium">Gallery</a>
+                <a href="#contact" class="text-white font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO CONVERSION ZONE -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-grid min-h-[90vh] flex items-center">
+        <!-- Background Gradients -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brandOrange/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brandCyan/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Copy -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-brandGold/10 border border-brandGold/30 text-brandGold px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                        <i class="fa-solid fa-star"></i> TOP RATED COACHING INSTITUTE
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+                        BUILD STRONG CONCEPTS.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandOrange to-brandGold">ACHIEVE EXCELLENCE</span><br>
+                        AT STUDIOUS.
+                    </h1>
+                    
+                    <p class="text-lg text-textMuted max-w-2xl leading-relaxed">
+                        Empowering students with personalized attention, concept-first teaching, rigorous practice test series, and dedicated mentor support for School Boards & Competitive Foundations.
+                    </p>
+                    
+                    <!-- Badges -->
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <div class="flex items-center gap-2 text-sm text-gray-300 bg-cardSurface/50 px-4 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-brain text-brandCyan"></i> 100% Concept Clarity
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-300 bg-cardSurface/50 px-4 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-users text-brandGold"></i> Small Batch Sizes
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-300 bg-cardSurface/50 px-4 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-medal text-brandOrange"></i> Verified Toppers
+                        </div>
+                    </div>
+
+                    <!-- Dual CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <button onclick="openModal()" class="w-full sm:w-auto text-center bg-brandOrange hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(255,94,58,0.3)] transition transform hover:-translate-y-1">
+                            BOOK FREE DEMO CLASS
+                        </button>
+                        <button onclick="directWhatsApp('General Enquiry')" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-cardSurface hover:bg-gray-800 border border-gray-700 text-white font-bold py-4 px-8 rounded-xl transition transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-whatsapp text-xl"></i> CHAT ON WHATSAPP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Glass Card Form -->
+                <div class="lg:col-span-5 relative">
+                    <!-- Decorative element -->
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-brandOrange/20 rounded-full blur-xl"></div>
+                    
+                    <div class="glass-card rounded-2xl p-8 relative z-10 shadow-2xl shadow-black/50">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">1-DAY FREE DEMO PASS</h3>
+                            <p class="text-sm text-textMuted">Experience our teaching methodology firsthand. Limited slots available.</p>
+                        </div>
+
+                        <form id="hero-form" onsubmit="handleHeroSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">Student Name</label>
+                                <input type="text" id="hero-name" required class="w-full form-input rounded-lg px-4 py-3 text-sm" placeholder="Enter full name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">Parent WhatsApp Number</label>
+                                <div class="flex">
+                                    <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-600 bg-gray-800 text-gray-400 text-sm">
+                                        +91
+                                    </span>
+                                    <input type="tel" id="hero-phone" required pattern="[0-9]{10}" class="w-full form-input rounded-r-lg px-4 py-3 text-sm" placeholder="10-digit mobile number">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">Grade / Standard</label>
+                                <select id="hero-grade" required class="w-full form-input rounded-lg px-4 py-3 text-sm appearance-none cursor-pointer">
+                                    <option value="" disabled selected>Select Class</option>
+                                    <option value="Class 6">Class 6th</option>
+                                    <option value="Class 7">Class 7th</option>
+                                    <option value="Class 8">Class 8th</option>
+                                    <option value="Class 9">Class 9th</option>
+                                    <option value="Class 10">Class 10th</option>
+                                    <option value="Class 11">Class 11th (Science)</option>
+                                    <option value="Class 12">Class 12th (Science)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-brandOrange to-orange-500 hover:from-orange-500 hover:to-brandOrange text-white font-bold py-4 rounded-lg mt-4 shadow-lg flex justify-center items-center gap-2 group transition-all">
+                                CLAIM FREE PASS <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <p class="text-[10px] text-center text-gray-500 mt-2">By submitting, you agree to receive updates via WhatsApp.</p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. KEY PILLARS & FEATURES -->
+    <section id="methodology" class="py-20 bg-darkBg border-t border-gray-800/50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">The Studious Advantage</h2>
+                <div class="w-20 h-1 bg-brandOrange mx-auto rounded-full mb-4"></div>
+                <p class="text-textMuted">Our scientifically designed pedagogy ensures every student reaches their maximum potential through focused learning.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-cardSurface rounded-xl p-8 border border-transparent hover:border-brandOrange/50 hover:shadow-[0_0_20px_rgba(255,94,58,0.15)] transition duration-300 group">
+                    <div class="w-14 h-14 bg-brandOrange/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-user-group text-2xl text-brandOrange"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Micro-Batch Focus</h3>
+                    <p class="text-sm text-textMuted">Strictly limited seats per batch to ensure individualized doubt-solving and personalized attention for every student.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-cardSurface rounded-xl p-8 border border-transparent hover:border-brandCyan/50 hover:shadow-[0_0_20px_rgba(0,210,255,0.15)] transition duration-300 group">
+                    <div class="w-14 h-14 bg-brandCyan/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-chalkboard text-2xl text-brandCyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Conceptual Mastery</h3>
+                    <p class="text-sm text-textMuted">Deep theoretical foundation using modern whiteboard techniques, focusing on 'Why' before 'How' for numerical problem mastery.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-cardSurface rounded-xl p-8 border border-transparent hover:border-brandGold/50 hover:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition duration-300 group">
+                    <div class="w-14 h-14 bg-brandGold/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-chart-line text-2xl text-brandGold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Periodic Analytics</h3>
+                    <p class="text-sm text-textMuted">Rigorous chapter-wise tests simulating exam environments, followed by detailed AI-driven progress reports for parents.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-cardSurface rounded-xl p-8 border border-transparent hover:border-whatsapp/50 hover:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition duration-300 group">
+                    <div class="w-14 h-14 bg-whatsapp/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-book-open-reader text-2xl text-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Study Ambience</h3>
+                    <p class="text-sm text-textMuted">Fully air-conditioned, well-lit, and distraction-free smart classrooms designed to maximize focus and retention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. COURSE PROGRAMS (3 TIERS) -->
+    <section id="courses" class="py-20 bg-[#0F131D]">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Academic Programs</h2>
+                <div class="w-20 h-1 bg-brandCyan mx-auto rounded-full mb-4"></div>
+                <p class="text-textMuted">Tailored curriculums mapping to latest board and competitive patterns.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+                
+                <!-- Tier 1: Primary -->
+                <div class="bg-cardSurface rounded-2xl p-8 border border-gray-800 flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gray-700/20 rounded-bl-full -z-0"></div>
+                    <div class="relative z-10 flex-grow">
+                        <span class="text-brandGold text-sm font-bold tracking-wider uppercase mb-2 block">Classes 6th - 8th</span>
+                        <h3 class="text-2xl font-bold text-white mb-4">Primary Foundation</h3>
+                        <p class="text-textMuted text-sm mb-6">Building the critical core concepts in Mathematics and Sciences early on to ensure seamless transition to higher classes.</p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> NCERT aligned curriculum</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> Olympiad orientation</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> Interactive worksheets</li>
+                        </ul>
+                    </div>
+                    <button onclick="directWhatsApp('Enquiry for Primary Foundation (6-8)')" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 rounded-lg transition border border-gray-600 flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-whatsapp"></i> ENQUIRE NOW
+                    </button>
+                </div>
+
+                <!-- Tier 2: Board Excellence (Highlighted) -->
+                <div class="bg-cardSurface rounded-2xl p-8 border-2 border-brandCyan animate-glow flex flex-col h-full transform md:-translate-y-4 relative z-10">
+                    <div class="absolute top-0 inset-x-0 bg-brandCyan text-darkBg text-xs font-bold text-center py-1 uppercase tracking-widest">Most Popular</div>
+                    <div class="mt-4 flex-grow">
+                        <span class="text-brandCyan text-sm font-bold tracking-wider uppercase mb-2 block">Classes 9th - 10th</span>
+                        <h3 class="text-2xl font-bold text-white mb-4">Board Excellence</h3>
+                        <p class="text-textMuted text-sm mb-6">Comprehensive syllabus coverage with extreme focus on board exam answer writing patterns and intensive test series.</p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandOrange mt-1"></i> 100% Syllabus Completion</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandOrange mt-1"></i> Previous Year Q&A Sessions</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandOrange mt-1"></i> 15+ Full Length Mock Tests</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandOrange mt-1"></i> NTSE Foundation Basics</li>
+                        </ul>
+                    </div>
+                    <button onclick="directWhatsApp('Enquiry for Board Excellence (9-10)')" class="w-full bg-brandOrange hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition shadow-lg flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> CHAT ON WHATSAPP
+                    </button>
+                </div>
+
+                <!-- Tier 3: Higher Secondary -->
+                <div class="bg-cardSurface rounded-2xl p-8 border border-gray-800 flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gray-700/20 rounded-bl-full -z-0"></div>
+                    <div class="relative z-10 flex-grow">
+                        <span class="text-brandOrange text-sm font-bold tracking-wider uppercase mb-2 block">Classes 11th - 12th</span>
+                        <h3 class="text-2xl font-bold text-white mb-4">Target PU / Board</h3>
+                        <p class="text-textMuted text-sm mb-6">Advanced conceptual clarity for PCM/PCB covering State/CBSE boards along with foundation for competitive entrance exams.</p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> Specialized PCM/PCB Faculty</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> Derivation & Numerical Focus</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brandCyan mt-1"></i> Doubt Clearing Counters</li>
+                        </ul>
+                    </div>
+                    <button onclick="directWhatsApp('Enquiry for Higher Secondary (11-12)')" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 rounded-lg transition border border-gray-600 flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-whatsapp"></i> ENQUIRE NOW
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. REAL CLASSROOM SHOWCASE (GALLERY) -->
+    <section id="gallery" class="py-20 bg-darkBg">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Inside Studious</h2>
+                <p class="text-textMuted">A glimpse into our focused learning environment.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Using Unsplash source for generic premium edtech/study imagery -->
+                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-xl border border-gray-800">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" alt="Classroom" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                        <span class="text-white font-semibold">Signature Entrance</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl border border-gray-800 aspect-square">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=400" alt="Students" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                        <span class="text-white text-sm font-medium">Batch Session</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl border border-gray-800 aspect-square">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=400" alt="Notes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                        <span class="text-white text-sm font-medium">Study Materials</span>
+                    </div>
+                </div>
+                <div class="col-span-2 relative group overflow-hidden rounded-xl border border-gray-800 h-48 md:h-auto">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800" alt="Mentorship" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                        <span class="text-white text-sm font-medium">1-on-1 Doubt Clearing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LOCATION & CONTACT HIGHLIGHT -->
+    <section id="contact" class="py-20 bg-[#0F131D] border-t border-gray-800/50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-cardSurface rounded-2xl overflow-hidden border border-gray-800">
+                
+                <!-- Info Card -->
+                <div class="p-8 lg:p-12 flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold text-white mb-2">Visit Our Center</h2>
+                    <p class="text-textMuted mb-8">Ready to start your journey? Drop by for a free counseling session with our academic experts.</p>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brandOrange/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-brandOrange"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Studious Coaching Classes</h4>
+                                <p class="text-sm text-gray-400">123 Education Hub, Knowledge Park, Main Road, City Center - 400001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brandCyan/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-clock text-brandCyan"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Operating Hours</h4>
+                                <p class="text-sm text-gray-400">Open Daily: 8:00 AM - 8:30 PM<br>Morning & Evening Study Batches</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="tel:+919876543210" class="flex-1 bg-white hover:bg-gray-200 text-darkBg font-bold py-3 px-4 rounded-lg text-center transition flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-phone"></i> +91 98765 43210
+                        </a>
+                        <button onclick="directWhatsApp('I want to schedule a center visit')" class="flex-1 bg-whatsapp hover:bg-[#20bd5a] text-white font-bold py-3 px-4 rounded-lg text-center transition flex justify-center items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp Us
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Google Maps Placeholder (Interactive element mapping to routing) -->
+                <div class="h-64 lg:h-auto relative bg-gray-800 flex items-center justify-center group overflow-hidden">
+                    <!-- Faux Map Background for aesthetics without loading heavy iframe immediately, routes on click -->
+                    <div class="absolute inset-0 opacity-50" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center; filter: grayscale(100%) contrast(120%);"></div>
+                    <div class="absolute inset-0 bg-[#0B0E17]/60 group-hover:bg-[#0B0E17]/40 transition duration-300"></div>
+                    
+                    <div class="relative z-10 text-center p-6">
+                        <div class="w-16 h-16 bg-brandOrange rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(255,94,58,0.5)] animate-pulse-fast">
+                            <i class="fa-solid fa-map-pin text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Get Directions</h3>
+                        <p class="text-sm text-gray-300 mb-4">Open turn-by-turn navigation on Google Maps</p>
+                        <a href="https://maps.google.com/?q=Coaching+Center" target="_blank" class="inline-block bg-white text-darkBg font-bold py-2 px-6 rounded-full hover:scale-105 transition transform text-sm">
+                            Open Maps <i class="fa-solid fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-darkBg border-t border-gray-800 py-8 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-xl font-bold text-white mb-2">STUDIOUS <span class="text-brandGold text-sm font-semibold">COACHING CLASSES</span></h2>
+            <p class="text-sm text-gray-500 mb-4">Building Concepts. Creating Achievers.</p>
+            <p class="text-xs text-gray-600">&copy; 2023 Studious Coaching Classes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 7. FLOATING WIDGETS & MODAL -->
+    
+    <!-- Sticky WhatsApp Floating Button (Desktop & Tablet mostly, hidden behind bottom bar on mobile) -->
+    <a href="#" onclick="directWhatsApp('Hello! I visited your website and need some information.'); return false;" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-whatsapp rounded-full flex items-center justify-center shadow-lg shadow-whatsapp/40 hover:scale-110 transition-transform z-40 animate-pulse-fast hidden md:flex">
+        <i class="fa-brands fa-whatsapp text-white text-3xl"></i>
+    </a>
+
+    <!-- Mobile Sticky Bottom Bar -->
+    <div class="fixed bottom-0 left-0 w-full bg-cardSurface border-t border-gray-800 z-40 md:hidden flex p-2 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+        <a href="tel:+919876543210" class="flex-1 flex flex-col items-center justify-center py-2 text-white border-r border-gray-700 hover:text-brandCyan transition">
+            <i class="fa-solid fa-phone text-xl mb-1"></i>
+            <span class="text-[10px] font-semibold tracking-wider">CALL DIRECT</span>
+        </a>
+        <button onclick="openModal()" class="flex-1 flex flex-col items-center justify-center py-2 text-brandOrange font-bold bg-brandOrange/10 rounded-r-lg">
+            <i class="fa-solid fa-calendar-check text-xl mb-1"></i>
+            <span class="text-[10px] font-semibold tracking-wider">BOOK DEMO</span>
+        </button>
+    </div>
+
+    <!-- Interactive Lead Capture Modal -->
+    <div id="demo-modal" class="fixed inset-0 z-[100] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            <div class="relative bg-cardSurface rounded-2xl text-left overflow-hidden shadow-2xl border border-gray-700 transform transition-all sm:my-8 sm:max-w-md w-full">
+                
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+
+                <div class="bg-gradient-to-r from-brandOrange/20 to-transparent p-6 pb-4 border-b border-gray-800">
+                    <h3 class="text-2xl font-bold text-white mb-1">Book Free Demo</h3>
+                    <p class="text-sm text-textMuted">Fill details to get instant confirmation on WhatsApp.</p>
+                </div>
+                
+                <div class="p-6">
+                    <form id="modal-form" onsubmit="handleModalSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Student Name</label>
+                            <input type="text" id="modal-name" required class="w-full form-input rounded-lg px-4 py-3 text-sm" placeholder="Enter full name">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">WhatsApp Number</label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-600 bg-gray-800 text-gray-400 text-sm">
+                                    +91
+                                </span>
+                                <input type="tel" id="modal-phone" required pattern="[0-9]{10}" class="w-full form-input rounded-r-lg px-4 py-3 text-sm" placeholder="10-digit number">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Current Class</label>
+                            <select id="modal-grade" required class="w-full form-input rounded-lg px-4 py-3 text-sm appearance-none cursor-pointer">
+                                <option value="" disabled selected>Select Class</option>
+                                <option value="6-8 (Primary)">Class 6th - 8th</option>
+                                <option value="9-10 (Board)">Class 9th - 10th</option>
+                                <option value="11-12 (PUC)">Class 11th - 12th</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-whatsapp hover:bg-[#20bd5a] text-white font-bold py-4 rounded-lg mt-2 shadow-lg shadow-whatsapp/30 flex justify-center items-center gap-2 transition">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> GET DETAILS ON WHATSAPP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Configuration
+        const WHATSAPP_NUMBER = '919876543210'; // Replace with actual institute number
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('demo-modal');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Direct WhatsApp Routing function
+        function directWhatsApp(contextMessage) {
+            const message = encodeURIComponent(`Hi Studious Coaching, ${contextMessage}`);
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        // Handle Hero Form Submit
+        function handleHeroSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('hero-name').value;
+            const phone = document.getElementById('hero-phone').value;
+            const grade = document.getElementById('hero-grade').value;
+            
+            const message = encodeURIComponent(`*New Demo Request (1-Day Pass)*\n\n*Name:* ${name}\n*Parent Phone:* ${phone}\n*Class:* ${grade}\n\nPlease share available demo timings.`);
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            
+            window.open(url, '_blank');
+            // Optional: reset form
+            // e.target.reset();
+        }
+
+        // Handle Modal Form Submit
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('modal-name').value;
+            const phone = document.getElementById('modal-phone').value;
+            const grade = document.getElementById('modal-grade').value;
+            
+            const message = encodeURIComponent(`*Demo Booking Enquiry*\n\n*Student Name:* ${name}\n*WhatsApp No:* ${phone}\n*Grade:* ${grade}\n\nI want to book a free demo class. Please assist.`);
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            
+            window.open(url, '_blank');
+            closeModal();
+            // Optional: reset form
+            // e.target.reset();
+        }
+
+        // Sticky Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
